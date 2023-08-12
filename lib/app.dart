@@ -1,8 +1,16 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
+import 'package:fluent_ui/fluent_ui.dart' hide Colors;
+import 'package:flutter/material.dart' hide IconButton;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:get/get.dart';
+import 'package:manjaro_hello/controller/setup_controller.dart';
 import 'package:manjaro_hello/hello.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/link.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -21,7 +29,7 @@ class _AppState extends State<App> {
         color: borderColor,
         width: 1,
         child: Row(
-          children: const [RightSide()],
+          children: [RightSide()],
         ),
       ),
     );
@@ -32,7 +40,8 @@ const backgroundStartColor = Color.fromARGB(255, 27, 27, 26);
 const backgroundEndColor = Color.fromARGB(255, 27, 27, 26);
 
 class RightSide extends StatelessWidget {
-  const RightSide({Key? key}) : super(key: key);
+  Controller controller = Get.find();
+  RightSide({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -50,7 +59,122 @@ class RightSide extends StatelessWidget {
               children: [Expanded(child: MoveWindow()), const WindowButtons()],
             ),
           ),
-          Hello()
+          FutureBuilder(
+            future: controller.initialize(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Hello();
+              } else {
+                return Expanded(
+                    child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Estamos cargando la informacion necesaria",
+                      style: TextStyle(fontWeight: FontWeight.w200),
+                    )
+                  ],
+                ));
+              }
+            },
+          ),
+          Expanded(child: Container()),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Obx(() => ComboboxFormField<String>(
+                      items: [
+                        ComboBoxItem(child: Text("Español"), value: "Español"),
+                        ComboBoxItem(
+                          child: Text("English"),
+                          value: "English",
+                        )
+                      ],
+                      value: controller.saved_languaje.value,
+                      onChanged: (value) {
+                        controller.change_saved_languaje(value!);
+                        controller.saved_languaje.value = value;
+                      },
+                    )),
+                Row(
+                  children: [
+                    Link(
+                      // from the url_launcher package
+                      uri: Uri.parse('https://t.me/manjaro_official'),
+                      builder: (Context, open) {
+                        return IconButton(
+                          onPressed: open,
+                          icon: SvgPicture.asset(
+                            "assets/telegram.svg",
+                            height: 30,
+                            width: 30,
+                          ),
+                        );
+                      },
+                    ),
+                    Link(
+                      // from the url_launcher package
+                      uri: Uri.parse('https://www.facebook.com/ManjaroLinux'),
+                      builder: (Context, open) {
+                        return IconButton(
+                          onPressed: open,
+                          icon: SvgPicture.asset(
+                            "assets/facebook.svg",
+                            height: 30,
+                            width: 30,
+                          ),
+                        );
+                      },
+                    ),
+                    Link(
+                      // from the url_launcher package
+                      uri: Uri.parse('https://twitter.com/ManjaroLinux'),
+                      builder: (Context, open) {
+                        return IconButton(
+                          onPressed: open,
+                          icon: SvgPicture.asset(
+                            "assets/twitter.svg",
+                            height: 30,
+                            width: 30,
+                          ),
+                        );
+                      },
+                    ),
+                    Link(
+                      // from the url_launcher package
+                      uri: Uri.parse('https://www.reddit.com/r/ManjaroLinux/'),
+                      builder: (Context, open) {
+                        return IconButton(
+                          onPressed: open,
+                          icon: SvgPicture.asset(
+                            "assets/reddit.svg",
+                            height: 30,
+                            width: 30,
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Obx(() => ToggleSwitch(
+                      leadingContent: true,
+                      content: Text("Abrir al inicio"),
+                      checked: controller.launch_startup.value,
+                      onChanged: (value) {
+                        controller.change_launch_startup(value);
+                        controller.launch_startup.value =
+                            !controller.launch_startup.value;
+                      },
+                    ))
+              ],
+            ),
+          ),
         ]),
       ),
     );

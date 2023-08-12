@@ -1,5 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
+import 'package:manjaro_hello/controller/setup_controller.dart';
+import 'package:manjaro_hello/wizard_pages/repo_select.dart';
+import 'package:manjaro_hello/wizard_pages/software_install.dart';
 import 'package:manjaro_hello/wizard_pages/system_overview.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -13,10 +20,8 @@ class Wizard extends StatefulWidget {
 const borderColor = Color.fromARGB(255, 27, 27, 26);
 
 List<Widget> pages = [
-  system_overview(),
-  Container(
-    color: Colors.black12,
-  ),
+  RepoView(),
+  SoftwareInstaller(),
   Container(
     color: Colors.black12,
   ),
@@ -48,7 +53,8 @@ class _WizardState extends State<Wizard> {
 
 const backgroundStartColor = Color.fromARGB(255, 27, 27, 26);
 const backgroundEndColor = Color.fromARGB(255, 27, 27, 26);
-final controller = PageController();
+final page_controller = PageController();
+Controller controller = Get.find();
 
 class RightSide extends StatelessWidget {
   const RightSide({Key? key}) : super(key: key);
@@ -75,8 +81,13 @@ class RightSide extends StatelessWidget {
             body: Container(
               //padding: EdgeInsets.only(bottom: 50),
               child: PageView(
-                controller: controller,
+                controller: page_controller,
                 children: pages,
+                onPageChanged: (value) {
+                  controller.is_first.value = value == 0;
+                  controller.is_last.value = value == 5;
+                  controller.skip_text.value = value == 0;
+                },
               ),
             ),
             bottomNavigationBar: Container(
@@ -86,16 +97,35 @@ class RightSide extends StatelessWidget {
                 children: [
                   SizedBox(),
                   SmoothPageIndicator(
-                    controller: controller,
+                    controller: page_controller,
                     count: pages.length,
-                    effect: ScaleEffect(),
+                    effect: ScaleEffect(
+                        dotHeight: 8,
+                        dotWidth: 8,
+                        activeDotColor: Colors.lightBlue),
                   ),
-                  Row(
-                    children: [
-                      TextButton(onPressed: () {}, child: Text("PREVIOUS")),
-                      TextButton(onPressed: () {}, child: Text("NEXT"))
-                    ],
-                  )
+                  Obx(() => Row(
+                        children: [
+                          TextButton(
+                              onPressed: controller.is_first.value
+                                  ? null
+                                  : () {
+                                      page_controller.previousPage(
+                                          duration: Duration(milliseconds: 3),
+                                          curve: Curves.bounceIn);
+                                    },
+                              child: Text("PREVIOUS")),
+                          TextButton(
+                              onPressed: controller.is_last.value
+                                  ? null
+                                  : () {
+                                      page_controller.nextPage(
+                                          duration: Duration(milliseconds: 3),
+                                          curve: Curves.bounceIn);
+                                    },
+                              child: Text("NEXT"))
+                        ],
+                      ))
                 ],
               ),
             ),

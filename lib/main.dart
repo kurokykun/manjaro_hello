@@ -2,12 +2,14 @@ import 'dart:ui';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:manjaro_hello/app.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:manjaro_hello/controller/setup_controller.dart';
 
-void main() {
+void main() async {
   runApp(MyApp());
-
+  final Controller controller = Get.put(Controller());
   // Add this code below
 
   doWhenWindowReady(() {
@@ -19,14 +21,6 @@ void main() {
   });
 }
 
-class MyScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
-}
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -34,7 +28,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp(
-      scrollBehavior: MyScrollBehavior(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: FluentThemeData.dark(),

@@ -4,18 +4,21 @@ import 'package:flutter/material.dart' hide ButtonStyle;
 import 'package:fluent_ui/fluent_ui.dart' hide FilledButton, Colors;
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
+import 'package:manjaro_hello/controller/setup_controller.dart';
 import 'package:manjaro_hello/wizard_view.dart';
 import 'package:url_launcher/link.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Hello extends StatefulWidget {
-  const Hello({super.key});
+  Hello({super.key});
 
   @override
   State<Hello> createState() => _HelloState();
 }
 
 class _HelloState extends State<Hello> {
+  Controller controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,7 +32,7 @@ class _HelloState extends State<Hello> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white)),
           Text(
-            "22.0.5 Sikaris",
+            controller.system_version.value,
             style: TextStyle(
                 fontSize: 40, fontWeight: FontWeight.bold, color: Colors.green),
           ),
@@ -88,7 +91,7 @@ class _HelloState extends State<Hello> {
                       onPressed: open,
                     );
                   },
-                )
+                ),
               ],
             ),
           ),
