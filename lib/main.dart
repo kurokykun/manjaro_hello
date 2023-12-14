@@ -1,15 +1,12 @@
 import 'dart:ui';
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:manjaro_hello/app.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:manjaro_hello/presentation/widgets/app.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:manjaro_hello/controller/setup_controller.dart';
 
 void main() async {
-  runApp(MyApp());
-  final Controller controller = Get.put(Controller());
+  runApp(const ProviderScope(child: MyApp()));
   // Add this code below
 
   doWhenWindowReady(() {
@@ -31,6 +28,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: FluentThemeData.dark(),
+      scrollBehavior:
+          ScrollConfiguration.of(context).copyWith(scrollbars: false),
       home: App(),
     );
   }

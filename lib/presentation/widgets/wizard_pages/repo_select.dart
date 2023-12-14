@@ -2,7 +2,7 @@
 
 import 'package:fluent_ui/fluent_ui.dart' hide Colors;
 import 'package:flutter/material.dart' hide Card;
-import 'package:manjaro_hello/wizard_view.dart';
+import 'package:manjaro_hello/presentation/widgets/wizard_view.dart';
 
 class RepoView extends StatefulWidget {
   RepoView({super.key});
@@ -39,7 +39,7 @@ class _RepoViewState extends State<RepoView> {
             Form(
                 key: formKey,
                 child: TextFormField(
-                  controller: controller.repo_controller,
+                  //Poner el controller del manejador de estados
                   autovalidateMode: AutovalidateMode.always,
                   decoration: InputDecoration(
                       errorStyle: TextStyle(height: 0),

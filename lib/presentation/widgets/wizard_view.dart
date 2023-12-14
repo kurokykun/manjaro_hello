@@ -2,12 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:bitsdojo_window/bitsdojo_window.dart';
-import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-import 'package:manjaro_hello/controller/setup_controller.dart';
-import 'package:manjaro_hello/wizard_pages/repo_select.dart';
-import 'package:manjaro_hello/wizard_pages/software_install.dart';
-import 'package:manjaro_hello/wizard_pages/system_overview.dart';
+import 'package:manjaro_hello/presentation/widgets/wizard_pages/repo_select.dart';
+import 'package:manjaro_hello/presentation/widgets/wizard_pages/software_pages/software_install.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Wizard extends StatefulWidget {
@@ -54,7 +50,6 @@ class _WizardState extends State<Wizard> {
 const backgroundStartColor = Color.fromARGB(255, 27, 27, 26);
 const backgroundEndColor = Color.fromARGB(255, 27, 27, 26);
 final page_controller = PageController();
-Controller controller = Get.find();
 
 class RightSide extends StatelessWidget {
   const RightSide({Key? key}) : super(key: key);
@@ -84,9 +79,10 @@ class RightSide extends StatelessWidget {
                 controller: page_controller,
                 children: pages,
                 onPageChanged: (value) {
-                  controller.is_first.value = value == 0;
+                  //Hacer manejo del del cambio de pagina
+                  /*controller.is_first.value = value == 0;
                   controller.is_last.value = value == 5;
-                  controller.skip_text.value = value == 0;
+                  controller.skip_text.value = value == 0;*/
                 },
               ),
             ),
@@ -104,28 +100,30 @@ class RightSide extends StatelessWidget {
                         dotWidth: 8,
                         activeDotColor: Colors.lightBlue),
                   ),
-                  Obx(() => Row(
-                        children: [
-                          TextButton(
-                              onPressed: controller.is_first.value
-                                  ? null
-                                  : () {
-                                      page_controller.previousPage(
-                                          duration: Duration(milliseconds: 3),
-                                          curve: Curves.bounceIn);
-                                    },
-                              child: Text("PREVIOUS")),
-                          TextButton(
-                              onPressed: controller.is_last.value
-                                  ? null
-                                  : () {
-                                      page_controller.nextPage(
-                                          duration: Duration(milliseconds: 3),
-                                          curve: Curves.bounceIn);
-                                    },
-                              child: Text("NEXT"))
-                        ],
-                      ))
+                  Row(
+                    children: [
+                      TextButton(
+                          //Manejo de estado de si es la primera pagina
+                          onPressed: true
+                              ? null
+                              : () {
+                                  page_controller.previousPage(
+                                      duration: Duration(milliseconds: 3),
+                                      curve: Curves.bounceIn);
+                                },
+                          child: Text("PREVIOUS")),
+                      TextButton(
+                          //Maneja el estado de si es la ultima pagina o no
+                          onPressed: false
+                              ? null
+                              : () {
+                                  page_controller.nextPage(
+                                      duration: Duration(milliseconds: 3),
+                                      curve: Curves.bounceIn);
+                                },
+                          child: Text("NEXT"))
+                    ],
+                  )
                 ],
               ),
             ),
