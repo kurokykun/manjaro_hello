@@ -80,7 +80,7 @@ flutter:
    - assets/facebook.svg
    - assets/twitter.svg
    - assets/reddit.svg
-   - assets/chromium-browser.svg
+   - assets/soft_icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

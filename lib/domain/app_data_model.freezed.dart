@@ -224,7 +224,6 @@ mixin _$App {
   String get description => throw _privateConstructorUsedError;
   String get pkg => throw _privateConstructorUsedError;
   List<dynamic> get extra => throw _privateConstructorUsedError;
-  bool get selected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -241,8 +240,7 @@ abstract class $AppCopyWith<$Res> {
       String icon,
       String description,
       String pkg,
-      List<dynamic> extra,
-      bool selected});
+      List<dynamic> extra});
 }
 
 /// @nodoc
@@ -262,7 +260,6 @@ class _$AppCopyWithImpl<$Res, $Val extends App> implements $AppCopyWith<$Res> {
     Object? description = null,
     Object? pkg = null,
     Object? extra = null,
-    Object? selected = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -285,10 +282,6 @@ class _$AppCopyWithImpl<$Res, $Val extends App> implements $AppCopyWith<$Res> {
           ? _value.extra
           : extra // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      selected: null == selected
-          ? _value.selected
-          : selected // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -304,8 +297,7 @@ abstract class _$$AppImplCopyWith<$Res> implements $AppCopyWith<$Res> {
       String icon,
       String description,
       String pkg,
-      List<dynamic> extra,
-      bool selected});
+      List<dynamic> extra});
 }
 
 /// @nodoc
@@ -322,7 +314,6 @@ class __$$AppImplCopyWithImpl<$Res> extends _$AppCopyWithImpl<$Res, _$AppImpl>
     Object? description = null,
     Object? pkg = null,
     Object? extra = null,
-    Object? selected = null,
   }) {
     return _then(_$AppImpl(
       name: null == name
@@ -345,10 +336,6 @@ class __$$AppImplCopyWithImpl<$Res> extends _$AppCopyWithImpl<$Res, _$AppImpl>
           ? _value._extra
           : extra // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
-      selected: null == selected
-          ? _value.selected
-          : selected // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -361,8 +348,7 @@ class _$AppImpl implements _App {
       required this.icon,
       required this.description,
       required this.pkg,
-      required final List<dynamic> extra,
-      required this.selected})
+      required final List<dynamic> extra})
       : _extra = extra;
 
   factory _$AppImpl.fromJson(Map<String, dynamic> json) =>
@@ -385,11 +371,8 @@ class _$AppImpl implements _App {
   }
 
   @override
-  final bool selected;
-
-  @override
   String toString() {
-    return 'App(name: $name, icon: $icon, description: $description, pkg: $pkg, extra: $extra, selected: $selected)';
+    return 'App(name: $name, icon: $icon, description: $description, pkg: $pkg, extra: $extra)';
   }
 
   @override
@@ -402,15 +385,13 @@ class _$AppImpl implements _App {
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.pkg, pkg) || other.pkg == pkg) &&
-            const DeepCollectionEquality().equals(other._extra, _extra) &&
-            (identical(other.selected, selected) ||
-                other.selected == selected));
+            const DeepCollectionEquality().equals(other._extra, _extra));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, name, icon, description, pkg,
-      const DeepCollectionEquality().hash(_extra), selected);
+      const DeepCollectionEquality().hash(_extra));
 
   @JsonKey(ignore: true)
   @override
@@ -432,8 +413,7 @@ abstract class _App implements App {
       required final String icon,
       required final String description,
       required final String pkg,
-      required final List<dynamic> extra,
-      required final bool selected}) = _$AppImpl;
+      required final List<dynamic> extra}) = _$AppImpl;
 
   factory _App.fromJson(Map<String, dynamic> json) = _$AppImpl.fromJson;
 
@@ -447,8 +427,6 @@ abstract class _App implements App {
   String get pkg;
   @override
   List<dynamic> get extra;
-  @override
-  bool get selected;
   @override
   @JsonKey(ignore: true)
   _$$AppImplCopyWith<_$AppImpl> get copyWith =>

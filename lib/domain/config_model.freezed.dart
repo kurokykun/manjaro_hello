@@ -29,6 +29,9 @@ mixin _$ConfigModel {
   bool get show_scroll_button => throw _privateConstructorUsedError;
   String get repo_controller_text => throw _privateConstructorUsedError;
   String get search_controller_text => throw _privateConstructorUsedError;
+  List<Category> get original_app_list => throw _privateConstructorUsedError;
+  List<Category> get modified_app_list => throw _privateConstructorUsedError;
+  Map<String, bool> get selected_app_map => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +54,10 @@ abstract class $ConfigModelCopyWith<$Res> {
       bool launch_startup,
       bool show_scroll_button,
       String repo_controller_text,
-      String search_controller_text});
+      String search_controller_text,
+      List<Category> original_app_list,
+      List<Category> modified_app_list,
+      Map<String, bool> selected_app_map});
 }
 
 /// @nodoc
@@ -76,6 +82,9 @@ class _$ConfigModelCopyWithImpl<$Res, $Val extends ConfigModel>
     Object? show_scroll_button = null,
     Object? repo_controller_text = null,
     Object? search_controller_text = null,
+    Object? original_app_list = null,
+    Object? modified_app_list = null,
+    Object? selected_app_map = null,
   }) {
     return _then(_value.copyWith(
       system_version: null == system_version
@@ -114,6 +123,18 @@ class _$ConfigModelCopyWithImpl<$Res, $Val extends ConfigModel>
           ? _value.search_controller_text
           : search_controller_text // ignore: cast_nullable_to_non_nullable
               as String,
+      original_app_list: null == original_app_list
+          ? _value.original_app_list
+          : original_app_list // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+      modified_app_list: null == modified_app_list
+          ? _value.modified_app_list
+          : modified_app_list // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+      selected_app_map: null == selected_app_map
+          ? _value.selected_app_map
+          : selected_app_map // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ) as $Val);
   }
 }
@@ -135,7 +156,10 @@ abstract class _$$ConfigModelImplCopyWith<$Res>
       bool launch_startup,
       bool show_scroll_button,
       String repo_controller_text,
-      String search_controller_text});
+      String search_controller_text,
+      List<Category> original_app_list,
+      List<Category> modified_app_list,
+      Map<String, bool> selected_app_map});
 }
 
 /// @nodoc
@@ -158,6 +182,9 @@ class __$$ConfigModelImplCopyWithImpl<$Res>
     Object? show_scroll_button = null,
     Object? repo_controller_text = null,
     Object? search_controller_text = null,
+    Object? original_app_list = null,
+    Object? modified_app_list = null,
+    Object? selected_app_map = null,
   }) {
     return _then(_$ConfigModelImpl(
       system_version: null == system_version
@@ -196,6 +223,18 @@ class __$$ConfigModelImplCopyWithImpl<$Res>
           ? _value.search_controller_text
           : search_controller_text // ignore: cast_nullable_to_non_nullable
               as String,
+      original_app_list: null == original_app_list
+          ? _value._original_app_list
+          : original_app_list // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+      modified_app_list: null == modified_app_list
+          ? _value._modified_app_list
+          : modified_app_list // ignore: cast_nullable_to_non_nullable
+              as List<Category>,
+      selected_app_map: null == selected_app_map
+          ? _value._selected_app_map
+          : selected_app_map // ignore: cast_nullable_to_non_nullable
+              as Map<String, bool>,
     ));
   }
 }
@@ -212,7 +251,13 @@ class _$ConfigModelImpl implements _ConfigModel {
       this.launch_startup = true,
       this.show_scroll_button = false,
       this.repo_controller_text = '',
-      this.search_controller_text = ''});
+      this.search_controller_text = '',
+      final List<Category> original_app_list = const [],
+      final List<Category> modified_app_list = const [],
+      final Map<String, bool> selected_app_map = const {}})
+      : _original_app_list = original_app_list,
+        _modified_app_list = modified_app_list,
+        _selected_app_map = selected_app_map;
 
   factory _$ConfigModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ConfigModelImplFromJson(json);
@@ -244,10 +289,38 @@ class _$ConfigModelImpl implements _ConfigModel {
   @override
   @JsonKey()
   final String search_controller_text;
+  final List<Category> _original_app_list;
+  @override
+  @JsonKey()
+  List<Category> get original_app_list {
+    if (_original_app_list is EqualUnmodifiableListView)
+      return _original_app_list;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_original_app_list);
+  }
+
+  final List<Category> _modified_app_list;
+  @override
+  @JsonKey()
+  List<Category> get modified_app_list {
+    if (_modified_app_list is EqualUnmodifiableListView)
+      return _modified_app_list;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_modified_app_list);
+  }
+
+  final Map<String, bool> _selected_app_map;
+  @override
+  @JsonKey()
+  Map<String, bool> get selected_app_map {
+    if (_selected_app_map is EqualUnmodifiableMapView) return _selected_app_map;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_selected_app_map);
+  }
 
   @override
   String toString() {
-    return 'ConfigModel(system_version: $system_version, is_first: $is_first, is_last: $is_last, valid_repo: $valid_repo, saved_languaje: $saved_languaje, launch_startup: $launch_startup, show_scroll_button: $show_scroll_button, repo_controller_text: $repo_controller_text, search_controller_text: $search_controller_text)';
+    return 'ConfigModel(system_version: $system_version, is_first: $is_first, is_last: $is_last, valid_repo: $valid_repo, saved_languaje: $saved_languaje, launch_startup: $launch_startup, show_scroll_button: $show_scroll_button, repo_controller_text: $repo_controller_text, search_controller_text: $search_controller_text, original_app_list: $original_app_list, modified_app_list: $modified_app_list, selected_app_map: $selected_app_map)';
   }
 
   @override
@@ -271,7 +344,13 @@ class _$ConfigModelImpl implements _ConfigModel {
             (identical(other.repo_controller_text, repo_controller_text) ||
                 other.repo_controller_text == repo_controller_text) &&
             (identical(other.search_controller_text, search_controller_text) ||
-                other.search_controller_text == search_controller_text));
+                other.search_controller_text == search_controller_text) &&
+            const DeepCollectionEquality()
+                .equals(other._original_app_list, _original_app_list) &&
+            const DeepCollectionEquality()
+                .equals(other._modified_app_list, _modified_app_list) &&
+            const DeepCollectionEquality()
+                .equals(other._selected_app_map, _selected_app_map));
   }
 
   @JsonKey(ignore: true)
@@ -286,7 +365,10 @@ class _$ConfigModelImpl implements _ConfigModel {
       launch_startup,
       show_scroll_button,
       repo_controller_text,
-      search_controller_text);
+      search_controller_text,
+      const DeepCollectionEquality().hash(_original_app_list),
+      const DeepCollectionEquality().hash(_modified_app_list),
+      const DeepCollectionEquality().hash(_selected_app_map));
 
   @JsonKey(ignore: true)
   @override
@@ -312,7 +394,10 @@ abstract class _ConfigModel implements ConfigModel {
       final bool launch_startup,
       final bool show_scroll_button,
       final String repo_controller_text,
-      final String search_controller_text}) = _$ConfigModelImpl;
+      final String search_controller_text,
+      final List<Category> original_app_list,
+      final List<Category> modified_app_list,
+      final Map<String, bool> selected_app_map}) = _$ConfigModelImpl;
 
   factory _ConfigModel.fromJson(Map<String, dynamic> json) =
       _$ConfigModelImpl.fromJson;
@@ -335,6 +420,12 @@ abstract class _ConfigModel implements ConfigModel {
   String get repo_controller_text;
   @override
   String get search_controller_text;
+  @override
+  List<Category> get original_app_list;
+  @override
+  List<Category> get modified_app_list;
+  @override
+  Map<String, bool> get selected_app_map;
   @override
   @JsonKey(ignore: true)
   _$$ConfigModelImplCopyWith<_$ConfigModelImpl> get copyWith =>

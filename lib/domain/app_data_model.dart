@@ -24,7 +24,6 @@ class App with _$App {
     required String description,
     required String pkg,
     required List<dynamic> extra,
-    required bool selected,
   }) = _App;
 
   factory App.fromJson(Map<String, dynamic> json) => _$AppFromJson(json);

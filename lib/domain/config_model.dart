@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:manjaro_hello/domain/app_data_model.dart';
 
 part 'config_model.freezed.dart';
 part 'config_model.g.dart';
@@ -15,6 +16,10 @@ class ConfigModel with _$ConfigModel {
     @Default(false) bool show_scroll_button,
     @Default('') String repo_controller_text,
     @Default('') String search_controller_text,
+    @Default([]) List<Category> original_app_list,
+    @Default([]) List<Category> modified_app_list,
+    //eliminar este ultimo
+    @Default({}) Map<String, bool> selected_app_map,
   }) = _ConfigModel;
 
   factory ConfigModel.fromJson(Map<String, dynamic> json) =>

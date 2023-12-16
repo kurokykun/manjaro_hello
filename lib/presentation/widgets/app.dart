@@ -64,6 +64,7 @@ class RightSide extends StatelessWidget {
         final configDataState = ref.watch(configDataProvider);
         return configDataState.when(
           data: (data) {
+            print("App Build");
             return Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -91,6 +92,7 @@ class RightSide extends StatelessWidget {
                       children: [
                         Consumer(
                           builder: (context, ref, child) {
+                            print("Lista de Idioma build");
                             var configState = ref.read(configProvider);
                             return ComboboxFormField<String>(
                               items: [

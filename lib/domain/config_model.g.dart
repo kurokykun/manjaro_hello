@@ -17,6 +17,19 @@ _$ConfigModelImpl _$$ConfigModelImplFromJson(Map<String, dynamic> json) =>
       show_scroll_button: json['show_scroll_button'] as bool? ?? false,
       repo_controller_text: json['repo_controller_text'] as String? ?? '',
       search_controller_text: json['search_controller_text'] as String? ?? '',
+      original_app_list: (json['original_app_list'] as List<dynamic>?)
+              ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      modified_app_list: (json['modified_app_list'] as List<dynamic>?)
+              ?.map((e) => Category.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      selected_app_map:
+          (json['selected_app_map'] as Map<String, dynamic>?)?.map(
+                (k, e) => MapEntry(k, e as bool),
+              ) ??
+              const {},
     );
 
 Map<String, dynamic> _$$ConfigModelImplToJson(_$ConfigModelImpl instance) =>
@@ -30,4 +43,7 @@ Map<String, dynamic> _$$ConfigModelImplToJson(_$ConfigModelImpl instance) =>
       'show_scroll_button': instance.show_scroll_button,
       'repo_controller_text': instance.repo_controller_text,
       'search_controller_text': instance.search_controller_text,
+      'original_app_list': instance.original_app_list,
+      'modified_app_list': instance.modified_app_list,
+      'selected_app_map': instance.selected_app_map,
     };

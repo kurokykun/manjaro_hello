@@ -30,7 +30,6 @@ _$AppImpl _$$AppImplFromJson(Map<String, dynamic> json) => _$AppImpl(
       description: json['description'] as String,
       pkg: json['pkg'] as String,
       extra: json['extra'] as List<dynamic>,
-      selected: json['selected'] as bool,
     );
 
 Map<String, dynamic> _$$AppImplToJson(_$AppImpl instance) => <String, dynamic>{
@@ -39,5 +38,4 @@ Map<String, dynamic> _$$AppImplToJson(_$AppImpl instance) => <String, dynamic>{
       'description': instance.description,
       'pkg': instance.pkg,
       'extra': instance.extra,
-      'selected': instance.selected,
     };
