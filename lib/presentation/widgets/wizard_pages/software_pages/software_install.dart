@@ -51,7 +51,6 @@ class _SoftwareInstallerState extends State<SoftwareInstaller> {
   }
 
   _card(List<Category> soft_list, int cat_index, int app_index) {
-    print("assets/soft_icons/${soft_list[cat_index].apps[app_index].icon}.svg");
     return Card(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
